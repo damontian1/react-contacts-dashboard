@@ -11,29 +11,27 @@ class App extends React.Component {
 
   constructor(){
     super();
-    this.handleDelete = this.handleDelete.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEdit = this.handleEdit.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
-    this.handleEditChange = this.handleEditChange.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleEditChange = this.handleEditChange.bind(this);
     this.state = { 
       contacts: [],
       contactToEdit: ""
-    }
-  }
-
-  componentWillMount(){
-    Api.readApi();
+    };
   }
 
   componentDidMount(){
+    Api.fetchNews()
+    Api.readApi();
     // everytime the page re-renders, the api will fetch the updated database, update the store state, and update the component state 
     Store.addEventListener(() =>{
       this.setState({
         contacts: Store.getContacts(),
         contactToEdit: Store.getContactToEdit()
-      })
-    })
+      });
+    });
   }
 
   handleDelete(id, event){
@@ -48,13 +46,13 @@ class App extends React.Component {
   }
 
   handleSubmit(e){
-    e.preventDefault()
+    e.preventDefault();
     // console.log(e.target.name.value, e.target.phone.value, e.target.email.value);
     var contact = {
       name: e.target.name.value,
       phone: e.target.phone.value,
       email: e.target.email.value,
-    }
+    };
     Actions.addContact(contact);
   }
 
@@ -66,8 +64,8 @@ class App extends React.Component {
       phone: e.target.phone.value,
       email: e.target.email.value,
     }
-    // console.log(e.target.id.value)
-    Actions.updateContact(contact)
+    Actions.updateContact(contact);
+    this.setState({contactToEdit: ""})
   }
 
   handleEditChange(inputName,event){
@@ -83,11 +81,27 @@ class App extends React.Component {
   render(){
     // console.log(this.state)
     return(
-      <div className="container">
+      <div>
         <Navigation/>
-        <ContactForm {...this.state} handleSubmit={this.handleSubmit} handleUpdate={this.handleUpdate} handleEditChange={this.handleEditChange}/>
-        <hr/>
-        <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-7">
+              <section id="api-info-sidebar">
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+              </section>
+            </div>
+            <div className="col-md-5">
+              <ContactForm {...this.state} handleSubmit={this.handleSubmit} handleUpdate={this.handleUpdate} handleEditChange={this.handleEditChange}/>
+            </div>
+          </div>
+          <small><strong>contact book with CRUD from Firebase.com</strong></small>
+          <div className="row">
+            <div className="col-md-12">
+              <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+            </div>
+          </div>
+
+        </div>
       </div>
     )
   }

@@ -76,6 +76,10 @@ Dispatcher.register(function(actions){
       Api.updateApi(payload.data) 
       Store.emitChange();
       break;
+    case "FETCH_WEATHER":
+    console.log(payload.data.data)
+      
+      break;
   }
 })
 

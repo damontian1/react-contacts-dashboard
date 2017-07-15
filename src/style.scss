@@ -1,0 +1,63 @@
+ /***********************/
+ /*    color scheme     */
+ /***********************/
+
+ $primary: #3F5EF8;
+ $secondary: #f7f7f7;
+ $highlight: #3ecf8e;
+ $dim: rgba(0,0,0,0.2);
+ $text: #6b7c93;
+
+
+ /***********************/
+ /*       global        */
+ /***********************/
+
+body {
+  background: #f7f7f7;
+}
+
+
+ /***********************/
+ /*      desktop        */
+ /***********************/
+
+section#navigation {
+  box-shadow: 0 4px 20px rgba(50,50,93,.50);
+  nav {
+    text-align: center;
+    padding: 1em;
+  }
+}
+section#api-info-sidebar {
+  padding: 2em 0em;
+}
+section#contactForm {
+  form {
+    width: 600px;
+    margin: 0 auto;
+  }
+  .input-group {
+    margin: 1em 0em;
+    width: 100%
+  }
+  .input-group-addon {
+    width: 150px
+  }
+  .contact-form-field {
+    width: 100%
+  }
+  .contact-form-button {
+    position: relative;
+    top: 0;
+    left: 50%;
+    width: 80%;
+    transform: translateX(-50%);
+    margin-top: 2em; 
+  }
+}
+
+
+ /***********************/
+ /*       mobile        */
+ /***********************/
