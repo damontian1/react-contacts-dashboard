@@ -1,6 +1,7 @@
 import React from "react";
 
 const ContactFormAdd = function(props){
+  // console.log(props)
   return(
     <section id="contactForm">
       <h3 className="text-center" style={{fontSize: "1.4em", fontWeight: "bold"}}>Add Contact</h3>

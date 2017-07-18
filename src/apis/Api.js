@@ -53,17 +53,17 @@ export const fetchWeatherCurrent = function(city){
     .get(`http://api.openweathermap.org/data/2.5/weather?q=${city},us&units=imperial&appid=898102236102b5d3edaa9d75b71f44b5`)
 }
 export const fetchWeather = function(){
-  return axios
-    .all([fetchWeatherCurrent(), fetchWeatherForecast()])
-    .then(axios.spread((current, forecast) =>
-      console.log(current, forecast)
-    ))  
+  // return axios
+  //   .all([fetchWeatherCurrent(), fetchWeatherForecast()])
+  //   .then(axios.spread((current, forecast) =>
+  //     console.log(current, forecast)
+  //   ))  
 }
 
 
 // NEWSAPI.ORG APIs
 export const fetchNews = function(){
   return axios
-    .get(`https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=7a0c9e4adf4e438e80c8c331e6e1c657`).then(response => console.log(response))
+    // .get(`https://newsapi.org/v1/articles?source=google-news&sortBy=top&apiKey=7a0c9e4adf4e438e80c8c331e6e1c657`).then(response => console.log(response))
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 const ContactFormEdit = function(props){
-  console.log(props)
+  // console.log(props)
   return(
     <div className="well">
       <h4 className="text-center">Update Contact</h4>

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "build": "node node_modules/webpack/bin/webpack.js"
+    "start": "node node_modules/webpack/bin/webpack.js && node server.js",
+    "develop": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "keywords": [],
   "author": "Damon Tian",
@@ -21,6 +21,7 @@
     "flux": "^3.1.2",
     "node-sass": "^4.5.3",
     "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.6.0",
     "react-dom": "^15.4.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",

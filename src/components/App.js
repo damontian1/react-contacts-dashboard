@@ -2,6 +2,7 @@ import React from "react";
 import Navigation from "./Navigation";
 import ContactForm from "./ContactForm";
 import ContactBook from "./ContactBook";
+import Sidebar from "./Sidebar";
 import Actions from "../actions/Actions";
 import Store from "../store/Store";
 import * as Api from "../apis/Api";
@@ -54,6 +55,11 @@ class App extends React.Component {
       email: e.target.email.value,
     };
     Actions.addContact(contact);
+    e.target.reset()
+    document.querySelector("#alert1").classList.add("appear")
+    setTimeout(() => {
+      document.querySelector("#alert1").classList.remove("appear")
+    },2000)
   }
 
   handleUpdate(e){
@@ -79,28 +85,15 @@ class App extends React.Component {
   }
 
   render(){
-    // console.log(this.state)
+    // console.log(this.state, "hey")
     return(
       <div>
         <Navigation/>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-7">
-              <section id="api-info-sidebar">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-              </section>
-            </div>
-            <div className="col-md-5">
-              <ContactForm {...this.state} handleSubmit={this.handleSubmit} handleUpdate={this.handleUpdate} handleEditChange={this.handleEditChange}/>
-            </div>
+            <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
+            <Sidebar {...this.state} handleSubmit={this.handleSubmit}/> 
           </div>
-          <small><strong>contact book with CRUD from Firebase.com</strong></small>
-          <div className="row">
-            <div className="col-md-12">
-              <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
-            </div>
-          </div>
-
         </div>
       </div>
     )

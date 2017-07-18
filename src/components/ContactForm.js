@@ -3,9 +3,10 @@ import ContactFormAdd from "./ContactFormAdd";
 import ContactFormEdit from "./ContactFormEdit";
 
 const ContactForm = function(props){
-  // console.log(props.contactToEdit)
+  console.log(props)
   return(
-    <div style={{padding: "2em 0em"}}>
+    <div>
+      <div className="alert alert-success" id="alert1">Contact Added!</div>
       { 
         props.contactToEdit === "" ? 
         <ContactFormAdd handleSubmit={props.handleSubmit}/>

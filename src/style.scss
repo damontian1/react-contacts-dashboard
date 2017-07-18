@@ -16,7 +16,16 @@
 body {
   background: #f7f7f7;
 }
-
+#alert1 {
+  transition: 0.5s ease;
+  visibility: hidden;
+  text-align: center;
+  opacity: 0
+}
+#alert1.appear {
+  visibility: visible;
+  opacity: 1;
+}
 
  /***********************/
  /*      desktop        */
@@ -26,7 +35,7 @@ section#navigation {
   box-shadow: 0 4px 20px rgba(50,50,93,.50);
   nav {
     text-align: center;
-    padding: 1em;
+    padding: 0.5em;
   }
 }
 section#api-info-sidebar {
@@ -34,7 +43,7 @@ section#api-info-sidebar {
 }
 section#contactForm {
   form {
-    width: 600px;
+    width: 100%;
     margin: 0 auto;
   }
   .input-group {
