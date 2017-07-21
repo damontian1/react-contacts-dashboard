@@ -13,6 +13,9 @@
  /*       global        */
  /***********************/
 
+* {
+  box-sizing: border-box;
+}
 body {
   background: #f7f7f7;
 }
@@ -27,6 +30,14 @@ body {
   opacity: 1;
 }
 
+/***********************/
+/* bootstrap overrides */
+/***********************/
+
+.navbar-default {  
+  border-color: transparent;
+}
+
  /***********************/
  /*      desktop        */
  /***********************/
@@ -39,7 +50,6 @@ section#navigation {
   }
 }
 section#api-info-sidebar {
-  padding: 2em 0em;
 }
 section#contactForm {
   form {

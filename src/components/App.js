@@ -19,18 +19,23 @@ class App extends React.Component {
     this.handleEditChange = this.handleEditChange.bind(this);
     this.state = { 
       contacts: [],
-      contactToEdit: ""
+      contactToEdit: "",
+      news: []
     };
   }
 
   componentDidMount(){
     Api.fetchNews()
     Api.readApi();
+    Api.fetchWeather("seattle")
     // everytime the page re-renders, the api will fetch the updated database, update the store state, and update the component state 
     Store.addEventListener(() =>{
       this.setState({
         contacts: Store.getContacts(),
-        contactToEdit: Store.getContactToEdit()
+        contactToEdit: Store.getContactToEdit(),
+        news: Store.getNews(),
+        currentWeather: Store.getCurrentWeather(),
+        forecastWeather: Store.getForecastWeather()
       });
     });
   }
@@ -85,11 +90,11 @@ class App extends React.Component {
   }
 
   render(){
-    // console.log(this.state, "hey")
+    // console.log(this.state)
     return(
       <div>
         <Navigation/>
-        <div className="container-fluid">
+        <div className="wrapper" style={{width: "80%", margin: "2em auto"}}>
           <div className="row">
             <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
             <Sidebar {...this.state} handleSubmit={this.handleSubmit}/> 

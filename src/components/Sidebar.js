@@ -7,7 +7,7 @@ const Sidebar = function(props){
   return(
     <div className="col-md-4">
       <ContactForm {...props}/>
-      <ApiWidget />
+      <ApiWidget news={props.news} currentWeather={props.currentWeather} forecastWeather={props.forecastWeather} />
     </div>
   )
 }

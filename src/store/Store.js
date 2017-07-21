@@ -4,6 +4,9 @@ import * as Api from "../apis/Api";
 
 let _contacts = [];
 let _contactToEdit = "";
+let _news = [];
+let _currentWeather = "";
+let _forecastWeather = [];
 
 const Store = Object.assign(EventEmitter.prototype, {
   getContactToEdit: function(){
@@ -12,8 +15,27 @@ const Store = Object.assign(EventEmitter.prototype, {
   getContacts: function(){
     return _contacts;
   },
+  getNews: function(){
+    return _news;
+  },
+  getCurrentWeather: function(){
+    return _currentWeather;
+  },
+  getForecastWeather: function(){
+    return _forecastWeather;
+  },
   setContacts: function(data){
+    // console.log(data)
     _contacts = data
+  },
+  setNews: function(data){
+    // console.log(data)
+    _news = data
+  },
+  setWeather: function(payload1, payload2){
+    // console.log(payload2.data)
+    _currentWeather = payload1.data;
+    _forecastWeather = payload2.data.list;
   },
   addContact: function(data){
     _contacts.push(data)
@@ -45,40 +67,48 @@ const Store = Object.assign(EventEmitter.prototype, {
 })
 
 Dispatcher.register(function(actions){
-  const payload = actions.data
-  // console.log(payload)
-  switch(payload.actionType){
+  const { payload } = actions.data
+  const { actionType } = actions.data
+  // console.log(actions.data.actionType)
+  switch(actionType){
     case "READ_CONTACTS":
-      Store.setContacts(payload.data);
+      Store.setContacts(payload);
       Store.emitChange();
       break;
     case "ADD_CONTACT":
     // console.log(payload.data)
       Store.addContact(payload.data);
-      Api.writeApi(payload.data) 
+      Api.writeApi(payload) 
       Store.emitChange();
       break;
     case "SET_CONTACT_TO_EDIT":
     // console.log(payload.data)
-      Store.setContactToEdit(payload.data);
+      Store.setContactToEdit(payload);
       // Api.deleteApi(payload.data) 
       Store.emitChange();
       break;
     case "DELETE_CONTACT":
     // console.log(payload.data)
-      Store.deleteContact(payload.data);
+      Store.deleteContact(payload);
       Api.deleteApi(payload.data) 
       Store.emitChange();
       break;
     case "UPDATE_CONTACT":
     // console.log(payload.data)
-      Store.updateContact(payload.data);
+      Store.updateContact(payload);
       Api.updateApi(payload.data) 
       Store.emitChange();
       break;
     case "FETCH_WEATHER":
-    console.log(payload.data.data)
-      
+    // console.log(actions.data.payload1)
+      Store.setWeather(actions.data.payload1, actions.data.payload2)
+      Store.emitChange();
+      break;
+    case "FETCH_NEWS":
+    // console.log("hey")
+      // console.log(payload)
+      Store.setNews(payload);
+      Store.emitChange();
       break;
   }
 })

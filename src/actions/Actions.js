@@ -1,46 +1,54 @@
 import Dispatcher from "../dispatcher/Dispatcher";
 
 const Actions = {
-  readContacts: function(data){
+  readContacts: function(payload){
     // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "READ_CONTACTS",
-      data
+      payload
     });
   },
-  addContact: function(data){
+  addContact: function(payload){
     // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "ADD_CONTACT",
-      data
+      payload
     });
   },
-  setContactToEdit: function(data){
+  setContactToEdit: function(payload){
     // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "SET_CONTACT_TO_EDIT",
-      data
+      payload
     });
   },
-  updateContact: function(data){
+  updateContact: function(payload){
     // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "UPDATE_CONTACT",
-      data
+      payload
     });
   },
-  deleteContact: function(data){
+  deleteContact: function(payload){
     // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "DELETE_CONTACT",
-      data
+      payload
     });
   },
-  fetchWeather: function(data){
-    // console.log(data)
+  fetchWeather: function(payload1, payload2){
+    // console.log(payload1, payload2)
     Dispatcher.handleViewAction({
       actionType: "FETCH_WEATHER",
-      data
+      payload1,
+      payload2
+    });
+  },
+  fetchNews: function(payload){
+    // console.log(payload.data.articles)
+    Dispatcher.handleViewAction({
+      actionType: "FETCH_NEWS",
+      payload: payload.data.articles
     });
   }
 };
