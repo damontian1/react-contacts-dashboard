@@ -37,6 +37,10 @@ body {
 .navbar-default {  
   border-color: transparent;
 }
+.alert {
+  padding: 0.9em;
+  margin: 0;
+}
 
  /***********************/
  /*      desktop        */
@@ -47,6 +51,9 @@ section#navigation {
   nav {
     text-align: center;
     padding: 0.5em;
+  }
+  ul {
+    list-style: none;
   }
 }
 section#api-info-sidebar {
@@ -75,8 +82,22 @@ section#contactForm {
     margin-top: 2em; 
   }
 }
-
+.weather-icons {
+  width: 100%;
+}
+.news-image {
+  width: 100%;
+}
 
  /***********************/
  /*       mobile        */
  /***********************/
+
+@media (max-width: 991px){
+  .weather-icons {
+    width: 100px;
+  }
+  .news-image {
+    width: 150px;
+  }
+}

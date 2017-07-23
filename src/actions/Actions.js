@@ -30,7 +30,6 @@ const Actions = {
     });
   },
   deleteContact: function(payload){
-    // console.log(data)
     Dispatcher.handleViewAction({
       actionType: "DELETE_CONTACT",
       payload

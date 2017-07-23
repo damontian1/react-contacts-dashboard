@@ -41,6 +41,7 @@ const Store = Object.assign(EventEmitter.prototype, {
     _contacts.push(data)
   },
   setContactToEdit: function(data){
+    // console.log(data)
     _contactToEdit = data
     // console.log(_contactToEdit)
   },
@@ -77,12 +78,12 @@ Dispatcher.register(function(actions){
       break;
     case "ADD_CONTACT":
     // console.log(payload.data)
-      Store.addContact(payload.data);
+      Store.addContact(payload);
       Api.writeApi(payload) 
       Store.emitChange();
       break;
     case "SET_CONTACT_TO_EDIT":
-    // console.log(payload.data)
+    // console.log(payload)
       Store.setContactToEdit(payload);
       // Api.deleteApi(payload.data) 
       Store.emitChange();
@@ -90,13 +91,13 @@ Dispatcher.register(function(actions){
     case "DELETE_CONTACT":
     // console.log(payload.data)
       Store.deleteContact(payload);
-      Api.deleteApi(payload.data) 
+      Api.deleteApi(payload) 
       Store.emitChange();
       break;
     case "UPDATE_CONTACT":
     // console.log(payload.data)
       Store.updateContact(payload);
-      Api.updateApi(payload.data) 
+      Api.updateApi(payload) 
       Store.emitChange();
       break;
     case "FETCH_WEATHER":

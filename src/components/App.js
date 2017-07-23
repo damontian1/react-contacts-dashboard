@@ -7,7 +7,6 @@ import Actions from "../actions/Actions";
 import Store from "../store/Store";
 import * as Api from "../apis/Api";
 
-// console.log(Api)
 class App extends React.Component {
 
   constructor(){
@@ -17,17 +16,20 @@ class App extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleEditChange = this.handleEditChange.bind(this);
+    this.handleSearchQuery = this.handleSearchQuery.bind(this);
+    this.handleQueryClick = this.handleQueryClick.bind(this);
     this.state = { 
       contacts: [],
       contactToEdit: "",
-      news: []
+      news: [],
+      query: ""
     };
   }
 
   componentDidMount(){
     Api.fetchNews()
     Api.readApi();
-    Api.fetchWeather("seattle")
+    Api.fetchWeather("New York")
     // everytime the page re-renders, the api will fetch the updated database, update the store state, and update the component state 
     Store.addEventListener(() =>{
       this.setState({
@@ -46,6 +48,8 @@ class App extends React.Component {
   }
 
   handleEdit(contact){
+    // window.scrollTo(0,0)
+    // console.log(contact)
     // this.setState({contactToEdit: 1})
     // console.log(this.state);
     Actions.setContactToEdit(contact);
@@ -89,15 +93,24 @@ class App extends React.Component {
     })
   }
 
+  handleSearchQuery(e){
+    document.querySelector("#navigation ul").style.visibility = "visible";
+    this.setState({query: e.target.value.toLowerCase()});
+  }
+
+  handleQueryClick(e){
+    document.querySelector("#navigation ul").style.visibility = "hidden";
+  }
+
   render(){
-    // console.log(this.state)
+    // console.log(this.state.contacts)
     return(
       <div>
-        <Navigation/>
-        <div className="wrapper" style={{width: "80%", margin: "2em auto"}}>
+        <Navigation contacts={this.state.contacts} handleSearchQuery={this.handleSearchQuery} query={this.state.query} handleQueryClick={this.handleQueryClick} />
+        <div className="wrapper" style={{width: "85%", margin: "2em auto"}}>
           <div className="row">
-            <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
-            <Sidebar {...this.state} handleSubmit={this.handleSubmit}/> 
+            <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete} />
+            <Sidebar {...this.state} handleUpdate={this.handleUpdate} handleEditChange={this.handleEditChange} handleSubmit={this.handleSubmit} /> 
           </div>
         </div>
       </div>
