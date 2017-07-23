@@ -46,11 +46,11 @@ export const deleteApi = function(id){
 // OPENWEATHERMAP.ORG APIs
 export const fetchWeatherForecast = function(city){
   return axios
-    .get(`https://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&cnt=3&appid=898102236102b5d3edaa9d75b71f44b5`)
+    .get(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${city},us&units=imperial&cnt=3&appid=898102236102b5d3edaa9d75b71f44b5`)
 }
 export const fetchWeatherCurrent = function(city){
   return axios
-    .get(`https://api.openweathermap.org/data/2.5/weather?q=${city},us&units=imperial&appid=898102236102b5d3edaa9d75b71f44b5`)
+    .get(`https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city},us&units=imperial&appid=898102236102b5d3edaa9d75b71f44b5`)
 }
 export const fetchWeather = function(city){
   return axios
