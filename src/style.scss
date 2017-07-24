@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,700');
  /***********************/
  /*    color scheme     */
  /***********************/
@@ -18,16 +19,31 @@
 }
 body {
   background: #f7f7f7;
+  font-family: "Muli";
+  font-size: 1.7em;
 }
 #alert1 {
-  transition: 0.5s ease;
   visibility: hidden;
   text-align: center;
-  opacity: 0
+  opacity: 0;
 }
 #alert1.appear {
+  position: relative;
   visibility: visible;
   opacity: 1;
+  transition: 0.5s ease;
+  z-index: 2;
+}
+.bolder {
+  font-weight: bolder;
+}
+.shadow-effect {
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.01), 0 0 0 1px rgba(0,0,0,0.03);
+  border-radius: 4px;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: lightgray;
 }
 
 /***********************/
@@ -40,6 +56,10 @@ body {
 .alert {
   padding: 0.9em;
   margin: 0;
+}
+.btn-success {
+  background: #3f4448;
+  border-color: transparent;
 }
 
  /***********************/
@@ -54,6 +74,10 @@ section#navigation {
   }
   ul {
     list-style: none;
+  }
+  #logo {
+    width: 215px;
+    padding: 0.2em 0em;
   }
 }
 section#api-info-sidebar {
@@ -99,5 +123,9 @@ section#contactForm {
   }
   .news-image {
     width: 150px;
+  }
+  section#navigation #logo {
+    width: 215px;
+    padding: 1em 0em;
   }
 }

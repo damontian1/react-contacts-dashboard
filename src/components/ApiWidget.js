@@ -52,9 +52,9 @@ const ApiWidget = ({news, currentWeather, forecastWeather}) => {
 
   return(
     <section id="api-info-sidebar">
-      <div className="weather-widget" style={{border: "1px solid lightgray", padding: "1.5em", margin: "1em 0em"}}>
+      <div className="weather-widget shadow-effect" style={{border: "1px solid lightgray", padding: "1.5em", margin: "1em 0em"}}>
         <div>
-          <h4>Weather and Forecast {currentWeather ? `in ${currentWeather.name}` : null}</h4>
+          <h4 className="bolder">Weather and Forecast {currentWeather ? `in ${currentWeather.name}` : null}</h4>
           <small>Powered By: <a href="http://openweathermap.org" target="_blank">OpenWeatherMap API</a></small>
           <hr/>
           <div className="row">
@@ -64,8 +64,8 @@ const ApiWidget = ({news, currentWeather, forecastWeather}) => {
         </div>
       
       </div>
-      <div className="news-widget" style={{border: "1px solid lightgray", padding: "1.5em", margin: "1em 0em"}}>
-        <h4>Google News: Current Top Stories</h4>
+      <div className="news-widget shadow-effect" style={{border: "1px solid lightgray", padding: "1.5em", margin: "1em 0em"}}>
+        <h4 className="bolder">Google News: Current Top Stories</h4>
         <small>Powered By: <a href="https://newsapi.org" target="_blank">News API</a></small>
         <hr/>
         <div>

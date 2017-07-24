@@ -34,30 +34,30 @@ const Navigation = function(props){
   return(
     <section id="navigation">
       <div className="navigation-wrapper" style={{width: "85%", margin: "0 auto"}}>
-          <nav className="navbar navbar-default" style={{margin: "0", padding: "1em 0em"}}>
+          <nav className="navbar navbar-default" style={{margin: "0", padding: "0.7em 0em"}}>
 
             <div className="row">
 
-              <div className="col-md-2">
+              <div className="col-md-3">
                 <div>
                   <a href="/">
-                    <img src={__dirname + "assets/react.png"} alt="" style={{width: "150px", margin: "0.5em 0em"}}/>
+                    <img src={__dirname + "assets/logo.svg"} alt="" id="logo"/>
                   </a>
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-5">
                 <div style={{position: "relative"}}>
-                  <input type="text" onChange={props.handleSearchQuery} placeholder="Search Address Book by Name, Email, or Number" style={{padding : "1em",width : "100%", borderRadius : "4px",background : "#3f4448",border : "transparent", color: "white"}}/>
+                  <input type="text" onKeyDown={props.handleKeyDown} onChange={props.handleSearchQuery} placeholder="Search Address Book by Name, Email, or Number" style={{padding : "0.5em",width : "100%", borderRadius : "4px",background : "#3f4448",border : "transparent", color: "white"}}/>
                   <ul className="list-group" style={{position: "absolute", zIndex: "1", width: "100%"}}>
                     {props.query ? renderSearchResults() : null}
                   </ul>
                 </div>
               </div>
 
-              <div className="col-md-4">
+              <div className="col-md-4" style={{position: "relative"}}>
                 <div className="alert alert-success hidden-xs hidden-sm" id="alert1">Contact Added!</div>
-                <small className="pull-right hidden-xs hidden-sm">Made by: Damon Tian</small>
+                <small className="pull-right hidden-xs hidden-sm" style={{position:"absolute", top: "20px", right: "15px", zIndex: "1"}}>Made by: Damon Tian</small>
               </div>
 
             </div>

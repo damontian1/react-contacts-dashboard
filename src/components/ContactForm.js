@@ -5,7 +5,7 @@ import ContactFormEdit from "./ContactFormEdit";
 const ContactForm = function(props){
   // console.log(props)
   return(
-    <div style={{border: "1px solid lightgray", padding: "1.5em"}}>
+    <div className="shadow-effect" style={{border: "1px solid lightgray", padding: "1.5em"}}>
       { 
         props.contactToEdit === "" ? 
         <ContactFormAdd handleSubmit={props.handleSubmit}/>

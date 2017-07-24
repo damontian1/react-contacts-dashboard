@@ -18,6 +18,7 @@ class App extends React.Component {
     this.handleEditChange = this.handleEditChange.bind(this);
     this.handleSearchQuery = this.handleSearchQuery.bind(this);
     this.handleQueryClick = this.handleQueryClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.state = { 
       contacts: [],
       contactToEdit: "",
@@ -93,6 +94,12 @@ class App extends React.Component {
     })
   }
 
+  handleKeyDown(e){
+    if(e.keyCode === 27){
+      document.querySelector("#navigation ul").style.visibility = "hidden";
+    }
+  }
+
   handleSearchQuery(e){
     document.querySelector("#navigation ul").style.visibility = "visible";
     this.setState({query: e.target.value.toLowerCase()});
@@ -106,7 +113,7 @@ class App extends React.Component {
     // console.log(this.state.contacts)
     return(
       <div>
-        <Navigation contacts={this.state.contacts} handleSearchQuery={this.handleSearchQuery} query={this.state.query} handleQueryClick={this.handleQueryClick} />
+        <Navigation contacts={this.state.contacts} handleSearchQuery={this.handleSearchQuery} query={this.state.query} handleQueryClick={this.handleQueryClick} handleKeyDown={this.handleKeyDown} />
         <div className="wrapper" style={{width: "85%", margin: "2em auto"}}>
           <div className="row">
             <ContactBook {...this.state} handleEdit={this.handleEdit} handleDelete={this.handleDelete} />
