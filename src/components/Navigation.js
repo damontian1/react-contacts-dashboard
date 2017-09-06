@@ -41,7 +41,7 @@ const Navigation = function(props){
               <div className="col-md-3">
                 <div>
                   <a href="/">
-                    <img src={__dirname + "assets/logo.svg"} alt="" id="logo"/>
+                    <img src={"./assets/logo.png"} alt="" id="logo"/>
                   </a>
                 </div>
               </div>
