@@ -3,7 +3,7 @@ import * as firebase from "firebase";
 import axios from "axios";
 
 const app = firebase.initializeApp({
-  databaseURL: "https://react-address-book-test.firebaseio.com/"
+  databaseURL: "https://react-contacts-dashboard.firebaseio.com/"
 });
 const firebaseApi = app.database();
 
@@ -57,7 +57,7 @@ export const fetchWeather = function(city){
     .all([fetchWeatherCurrent(city), fetchWeatherForecast(city)])
     .then(axios.spread((current, forecast) =>
       Actions.fetchWeather(current, forecast)
-    ))  
+    ))
 }
 
 // // openweather icons http://openweathermap.org/img/w/ + 03d + .png
