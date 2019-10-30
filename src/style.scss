@@ -1,19 +1,12 @@
+/*-----------------------
+	FIXES
+-----------------------*/
 @import url('https://fonts.googleapis.com/css?family=Muli:400,700');
- /***********************/
- /*    color scheme     */
- /***********************/
-
- $primary: #3F5EF8;
- $secondary: #f7f7f7;
- $highlight: #3ecf8e;
- $dim: rgba(0,0,0,0.2);
- $text: #6b7c93;
-
-
- /***********************/
- /*       global        */
- /***********************/
-
+$primary: #3F5EF8;
+$secondary: #f7f7f7;
+$highlight: #3ecf8e;
+$dim: rgba(0,0,0,0.2);
+$text: #6b7c93;
 * {
   box-sizing: border-box;
 }
@@ -45,11 +38,6 @@ body {
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: lightgray;
 }
-
-/***********************/
-/* bootstrap overrides */
-/***********************/
-
 .navbar-default {
   border-color: transparent;
 }
@@ -65,11 +53,9 @@ body {
   background: #5cb85c;
   transition: 0.3s ease;
 }
-
- /***********************/
- /*      desktop        */
- /***********************/
-
+/*-----------------------
+	DESKTOP
+-----------------------*/
 section#navigation {
   box-shadow: 0 4px 20px rgba(50,50,93,.50);
   nav {
@@ -116,11 +102,9 @@ section#contactForm {
 .news-image {
   width: 100%;
 }
-
- /***********************/
- /*       mobile        */
- /***********************/
-
+/*-----------------------
+	MOBILE
+-----------------------*/
 @media (max-width: 991px){
   .weather-icons {
     width: 100px;
