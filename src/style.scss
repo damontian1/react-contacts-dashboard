@@ -1,5 +1,5 @@
 /*-----------------------
-	FIXES
+	SETUP
 -----------------------*/
 @import url('https://fonts.googleapis.com/css?family=Muli:400,700');
 $primary: #3F5EF8;
@@ -16,9 +16,11 @@ body {
   font-size: 1.7em;
 }
 #alert1 {
+  position: absolute;
   visibility: hidden;
   text-align: center;
   opacity: 0;
+  right: 5px;
 }
 #alert1.appear {
   position: relative;
@@ -53,6 +55,67 @@ body {
   background: #5cb85c;
   transition: 0.3s ease;
 }
+.loader:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin-top: -30px;
+  margin-left: -30px;
+  border-radius: 50%;
+  border: .25em solid black;
+  border-right-color: transparent;
+  animation: spin .75s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+$spaceamounts: (0, 1, 2, 3, 4, 5);
+$ranges: (
+    0: "0",
+    1: "0.25",
+    2: "0.5",
+    3: "1",
+    4: "1.5",
+    5: "3"
+);
+$sides: ("top", "bottom", "left", "right", "x", "y", "");
+
+@each $space in $spaceamounts {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$space} {
+      @if ($side == "y") {
+		 	margin-top: #{map-get($ranges, $space)}rem !important;
+      	margin-bottom: #{map-get($ranges, $space)}rem !important;
+      } @else if ($side == "x") {
+      	margin-left: #{map-get($ranges, $space)}rem !important;
+      	margin-right: #{map-get($ranges, $space)}rem !important;
+      }
+      @else if ($side == "") {
+      	margin: #{map-get($ranges, $space)}rem !important;
+      } @else {
+      	margin-#{$side}: #{map-get($ranges, $space)}rem !important;
+      }
+    }
+    .p#{str-slice($side, 0, 1)}-#{$space} {
+      @if ($side == "y") {
+      	padding-top: #{map-get($ranges, $space)}rem !important;
+      	padding-bottom: #{map-get($ranges, $space)}rem !important;
+      } @else if ($side == "x") {
+		 	padding-left: #{map-get($ranges, $space)}rem !important;
+      	padding-right: #{map-get($ranges, $space)}rem !important;
+      }
+      @else if ($side == "") {
+      	padding: #{map-get($ranges, $space)}rem !important;
+      } @else {
+      	padding-#{$side}: #{map-get($ranges, $space)}rem !important;
+      }
+    }
+  }
+}
 /*-----------------------
 	DESKTOP
 -----------------------*/
@@ -60,13 +123,16 @@ section#navigation {
   box-shadow: 0 4px 20px rgba(50,50,93,.50);
   nav {
     text-align: center;
-    padding: 0.7em 0 0em 0;
+    & > div.row {
+      display: flex;
+      align-items: center;
+    }
   }
   ul {
     list-style: none;
   }
   #logo {
-    width: 215px;
+    width: 52px;
     padding: 0.2em 0em;
   }
 }
@@ -99,13 +165,20 @@ section#contactForm {
 .weather-icons {
   width: 100%;
 }
-.news-image {
-  width: 100%;
+.news-widget__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 1rem;
+  justify-items: center;
+  .news-image {
+    width: 100%;
+    max-width: 350px;
+  }
 }
 /*-----------------------
 	MOBILE
 -----------------------*/
-@media (max-width: 991px){
+@media (max-width: 992px){
   .weather-icons {
     width: 100px;
   }
@@ -113,13 +186,14 @@ section#contactForm {
     width: 150px;
   }
   section#navigation {
-    #logo {
-      width: 215px;
-      padding: 1em 0em;
-    }
     nav {
       text-align: center;
       padding: 1em 0em;
+    }
+  }
+  .news-widget__cards {
+    .news-image {
+      max-width: 450px;
     }
   }
 }

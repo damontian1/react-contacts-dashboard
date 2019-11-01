@@ -8,7 +8,6 @@ class ContactForm extends React.Component {
     return (
       <Consumer>
         {props => {
-          console.log(props)
           return (
             <div className="shadow-effect" style={{ border: "1px solid lightgray", padding: "1.5em" }}>
               {!props.contactToEdit.name ? <ContactFormAdd /> : <ContactFormEdit />}

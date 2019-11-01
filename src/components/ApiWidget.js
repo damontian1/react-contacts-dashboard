@@ -10,13 +10,13 @@ class ApiWidget extends React.Component {
           const renderNews = () => {
             return props.news.map((item, i) => {
               return (
-                <div className="row" key={i} style={{ display: "flex", alignItems: "center", padding: "0.5em 0em" }}>
-                  <div className="col-md-5">
+                <div key={i} className="news-widget__cards pb-4">
+                  <div>
                     <a href={item.url} target="_blank" >
                       <img className="news-image" src={item.urlToImage} />
                     </a>
                   </div>
-                  <div className="col-md-7">
+                  <div>
                     <a href={item.url} target="_blank" >
                       <p>{item.title}</p>
                     </a>
@@ -32,9 +32,7 @@ class ApiWidget extends React.Component {
                 <h4 className="bolder">Google News: Current Top Stories</h4>
                 <small>Powered By: <a href="https://newsapi.org" target="_blank">News API</a></small>
                 <hr />
-                <div>
-                  {renderNews()}
-                </div>
+                {renderNews()}
               </div>
             </section>
           )

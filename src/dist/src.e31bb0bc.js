@@ -66822,16 +66822,19 @@ function (_React$Component) {
         phone: e.target.phone.value,
         email: e.target.email.value
       };
-      this.setState({
-        contacts: [].concat(_toConsumableArray(this.state.contacts), [contact]),
-        contactsQuery: [].concat(_toConsumableArray(this.state.contacts), [contact])
-      });
-      e.target.reset();
-      document.querySelector("#alert1").classList.add("appear");
-      setTimeout(function () {
-        document.querySelector("#alert1").classList.remove("appear");
-      }, 2000);
-      db.collection("users").add(contact);
+
+      if (contact.name && contact.phone && contact.email) {
+        this.setState({
+          contacts: [].concat(_toConsumableArray(this.state.contacts), [contact]),
+          contactsQuery: [].concat(_toConsumableArray(this.state.contacts), [contact])
+        });
+        e.target.reset();
+        document.querySelector("#alert1").classList.add("appear");
+        setTimeout(function () {
+          document.querySelector("#alert1").classList.remove("appear");
+        }, 2000);
+        db.collection("users").add(contact);
+      }
     }
   }, {
     key: "handleUpdate",
@@ -67064,18 +67067,21 @@ function (_React$Component) {
         }, _react.default.createElement("nav", {
           className: "navbar navbar-default"
         }, _react.default.createElement("div", {
-          className: "row"
-        }, _react.default.createElement("div", {
-          className: "col-md-3"
+          className: "py-3",
+          style: {
+            display: "grid",
+            gridTemplateColumns: "1fr 5fr",
+            alignItems: "center",
+            gridColumnGap: "1.5rem",
+            textAlign: "left"
+          }
         }, _react.default.createElement("div", null, _react.default.createElement("a", {
           href: "/"
         }, _react.default.createElement("img", {
           src: _logo.default,
           alt: "",
           id: "logo"
-        })))), _react.default.createElement("div", {
-          className: "col-md-5"
-        }, _react.default.createElement("div", {
+        }))), _react.default.createElement("div", {
           style: {
             position: "relative"
           }
@@ -67100,23 +67106,7 @@ function (_React$Component) {
             zIndex: "1",
             width: "100%"
           }
-        }))), _react.default.createElement("div", {
-          className: "col-md-4",
-          style: {
-            position: "relative"
-          }
-        }, _react.default.createElement("div", {
-          className: "alert alert-success hidden-xs hidden-sm",
-          id: "alert1"
-        }, "Contact Added!"), _react.default.createElement("small", {
-          className: "pull-right hidden-xs hidden-sm",
-          style: {
-            position: "absolute",
-            top: "20px",
-            right: "15px",
-            zIndex: "1"
-          }
-        }, "Made by: Damon Tian"))))));
+        }))))));
       });
     }
   }]);
@@ -67126,7 +67116,30 @@ function (_React$Component) {
 
 var _default = Navigation;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./ContactFormEdit":"components/ContactFormEdit.js","./Context":"components/Context.js","../assets/logo.png":"assets/logo.png"}],"components/ContactBook.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./ContactFormEdit":"components/ContactFormEdit.js","./Context":"components/Context.js","../assets/logo.png":"assets/logo.png"}],"components/Spinner.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Spinner = function Spinner() {
+  return _react.default.createElement("div", {
+    className: "loader loader-v2",
+    style: {
+      marginTop: "10rem"
+    }
+  });
+};
+
+var _default = Spinner;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"components/ContactBook.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67137,6 +67150,8 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 
 var _Context = require("./Context");
+
+var _Spinner = _interopRequireDefault(require("./Spinner"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67173,48 +67188,52 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement(_Context.Consumer, null, function (props) {
+        function renderList() {
+          return props.contacts.slice(0).reverse().map(function (item, i) {
+            return _react.default.createElement("div", {
+              key: i,
+              id: item.id,
+              className: "shadow-effect",
+              style: {
+                border: "1px solid lightgray",
+                padding: "1em",
+                margin: "0em 0em 1em 0em"
+              }
+            }, _react.default.createElement("div", {
+              className: "row"
+            }, _react.default.createElement("div", {
+              className: "col-md-9"
+            }, _react.default.createElement("h3", {
+              className: "bolder"
+            }, item.name), _react.default.createElement("p", null, item.email), _react.default.createElement("p", null, item.phone)), _react.default.createElement("div", {
+              className: "col-md-3",
+              style: {
+                padding: "3em 0em"
+              }
+            }, _react.default.createElement("div", {
+              className: "btn-group",
+              style: {
+                padding: "0.75em"
+              }
+            }, _react.default.createElement("a", {
+              href: "#"
+            }, _react.default.createElement("button", {
+              type: "button",
+              className: "btn btn-default bolder",
+              onClick: props.handleEdit.bind(null, item)
+            }, "Edit")), _react.default.createElement("a", {
+              href: "#"
+            }, _react.default.createElement("button", {
+              type: "button",
+              className: "btn btn-default bolder",
+              onClick: props.handleDelete.bind(null, item.id)
+            }, "Delete"))))));
+          });
+        }
+
         return _react.default.createElement("div", {
           className: "col-md-8 col-sm-6"
-        }, props.contacts.slice(0).reverse().map(function (item, i) {
-          return _react.default.createElement("div", {
-            key: i,
-            id: item.id,
-            className: "shadow-effect",
-            style: {
-              border: "1px solid lightgray",
-              padding: "1em",
-              margin: "0em 0em 1em 0em"
-            }
-          }, _react.default.createElement("div", {
-            className: "row"
-          }, _react.default.createElement("div", {
-            className: "col-md-9"
-          }, _react.default.createElement("h3", {
-            className: "bolder"
-          }, item.name), _react.default.createElement("p", null, item.email), _react.default.createElement("p", null, item.phone)), _react.default.createElement("div", {
-            className: "col-md-3",
-            style: {
-              padding: "3em 0em"
-            }
-          }, _react.default.createElement("div", {
-            className: "btn-group",
-            style: {
-              padding: "0.75em"
-            }
-          }, _react.default.createElement("a", {
-            href: "#"
-          }, _react.default.createElement("button", {
-            type: "button",
-            className: "btn btn-default bolder",
-            onClick: props.handleEdit.bind(null, item)
-          }, "Edit")), _react.default.createElement("a", {
-            href: "#"
-          }, _react.default.createElement("button", {
-            type: "button",
-            className: "btn btn-default bolder",
-            onClick: props.handleDelete.bind(null, item.id)
-          }, "Delete"))))));
-        }));
+        }, props.contacts.length > 0 ? renderList() : _react.default.createElement(_Spinner.default, null));
       });
     }
   }]);
@@ -67224,7 +67243,7 @@ function (_React$Component) {
 
 var _default = ContactBook;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Context":"components/Context.js"}],"components/ContactFormAdd.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Context":"components/Context.js","./Spinner":"components/Spinner.js"}],"components/ContactFormAdd.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67373,7 +67392,6 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return _react.default.createElement(_Context.Consumer, null, function (props) {
-        console.log(props);
         return _react.default.createElement("div", {
           className: "shadow-effect",
           style: {
@@ -67440,24 +67458,15 @@ function (_React$Component) {
         var renderNews = function renderNews() {
           return props.news.map(function (item, i) {
             return _react.default.createElement("div", {
-              className: "row",
               key: i,
-              style: {
-                display: "flex",
-                alignItems: "center",
-                padding: "0.5em 0em"
-              }
-            }, _react.default.createElement("div", {
-              className: "col-md-5"
-            }, _react.default.createElement("a", {
+              className: "news-widget__cards pb-4"
+            }, _react.default.createElement("div", null, _react.default.createElement("a", {
               href: item.url,
               target: "_blank"
             }, _react.default.createElement("img", {
               className: "news-image",
               src: item.urlToImage
-            }))), _react.default.createElement("div", {
-              className: "col-md-7"
-            }, _react.default.createElement("a", {
+            }))), _react.default.createElement("div", null, _react.default.createElement("a", {
               href: item.url,
               target: "_blank"
             }, _react.default.createElement("p", null, item.title))));
@@ -67478,7 +67487,7 @@ function (_React$Component) {
         }, "Google News: Current Top Stories"), _react.default.createElement("small", null, "Powered By: ", _react.default.createElement("a", {
           href: "https://newsapi.org",
           target: "_blank"
-        }, "News API")), _react.default.createElement("hr", null), _react.default.createElement("div", null, renderNews())));
+        }, "News API")), _react.default.createElement("hr", null), renderNews()));
       });
     }
   }]);
@@ -67502,17 +67511,23 @@ var _ContactForm = _interopRequireDefault(require("./ContactForm"));
 
 var _ApiWidget = _interopRequireDefault(require("./ApiWidget"));
 
+var _Context = require("./Context");
+
+var _Spinner = _interopRequireDefault(require("./Spinner"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Sidebar = function Sidebar(props) {
-  return _react.default.createElement("div", {
-    className: "col-md-4 col-sm-6"
-  }, _react.default.createElement(_ContactForm.default, null), _react.default.createElement(_ApiWidget.default, null));
+var Sidebar = function Sidebar() {
+  return _react.default.createElement(_Context.Consumer, null, function (props) {
+    return _react.default.createElement("div", {
+      className: "col-md-4 col-sm-6"
+    }, _react.default.createElement(_ContactForm.default, null), props.news.length > 0 ? _react.default.createElement(_ApiWidget.default, null) : _react.default.createElement(_Spinner.default, null));
+  });
 };
 
 var _default = Sidebar;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./ContactForm":"components/ContactForm.js","./ApiWidget":"components/ApiWidget.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./ContactForm":"components/ContactForm.js","./ApiWidget":"components/ApiWidget.js","./Context":"components/Context.js","./Spinner":"components/Spinner.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -67571,8 +67586,14 @@ function (_React$Component) {
           margin: "2em auto"
         }
       }, _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement(_ContactBook.default, null), _react.default.createElement(_Sidebar.default, null))));
+        className: "row",
+        style: {
+          position: "relative"
+        }
+      }, _react.default.createElement("div", {
+        className: "alert alert-success hidden-xs hidden-sm",
+        id: "alert1"
+      }, "Contact Added!"), _react.default.createElement(_ContactBook.default, null), _react.default.createElement(_Sidebar.default, null))));
     }
   }]);
 
@@ -67695,7 +67716,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55362" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56104" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

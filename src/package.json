@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build index.html -d ../ --public-url /react-flux-contacts-dashboard/",
+    "build": "parcel build index.html -d ../ --public-url /react-contacts-dashboard/",
     "start": "parcel index.html"
   },
   "keywords": [],

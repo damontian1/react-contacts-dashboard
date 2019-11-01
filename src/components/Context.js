@@ -91,13 +91,15 @@ export class Provider extends React.Component {
       phone: e.target.phone.value,
       email: e.target.email.value,
     };
-    this.setState({ contacts: [...this.state.contacts, contact], contactsQuery: [...this.state.contacts, contact] });
-    e.target.reset()
-    document.querySelector("#alert1").classList.add("appear")
-    setTimeout(() => {
-      document.querySelector("#alert1").classList.remove("appear")
-    }, 2000)
-    db.collection("users").add(contact);
+    if (contact.name && contact.phone && contact.email) {
+      this.setState({ contacts: [...this.state.contacts, contact], contactsQuery: [...this.state.contacts, contact] });
+      e.target.reset()
+      document.querySelector("#alert1").classList.add("appear")
+      setTimeout(() => {
+        document.querySelector("#alert1").classList.remove("appear")
+      }, 2000)
+      db.collection("users").add(contact);
+    }
   }
 
   handleUpdate(e) {
